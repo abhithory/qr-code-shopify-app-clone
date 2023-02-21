@@ -201,7 +201,7 @@ export const QRCodesDB = {
   /* Perform a query on the database. Used by the various CRUD methods. */
   __query: function (sql, params = []) {
     return new Promise((resolve, reject) => {
-      this.db.all(sql, params, (err, result) => {
+      this.db.db.all(sql, params, (err, result) => {
         if (err) {
           reject(err);
           return;
