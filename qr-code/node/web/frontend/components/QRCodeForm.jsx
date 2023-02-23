@@ -51,6 +51,7 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
     (body) => {
       (async () => {
         const parsedBody = body;
+
         parsedBody.destination = parsedBody.destination[0];
         const QRCodeId = QRCode?.id;
         /* construct the appropriate URL to send the API request to based on whether the QR code is new or being updated */

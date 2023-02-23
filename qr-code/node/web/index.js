@@ -7,6 +7,9 @@ import serveStatic from "serve-static";
 import shopify from "./shopify.js";
 import GDPRWebhookHandlers from "./gdpr.js";
 
+import cors from 'cors';
+
+
 import applyQrCodeApiEndpoints from "./middleware/qr-code-api.js";
 import applyQrCodePublicEndpoints from "./middleware/qr-code-public.js";
 
@@ -18,6 +21,9 @@ const STATIC_PATH =
     : `${process.cwd()}/frontend/`;
 
 const app = express();
+
+
+app.options('*', cors()); // include before other routes
 
 // Set up Shopify authentication and webhook handling
 app.get(shopify.config.auth.path, shopify.auth.begin());
@@ -37,6 +43,7 @@ applyQrCodePublicEndpoints(app);
 app.use("/api/*", shopify.validateAuthenticatedSession());
 
 applyQrCodeApiEndpoints(app);
+
 
 app.use(serveStatic(STATIC_PATH, { index: false }));
 

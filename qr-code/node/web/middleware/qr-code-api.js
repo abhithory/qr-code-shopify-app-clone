@@ -62,6 +62,11 @@ export default function applyQrCodeApiEndpoints(app) {
   app.use(express.json());
 
   app.get("/api/discounts", async (req, res) => {
+
+    console.log('==============/api/discounts======================');
+    console.log("/api/discounts");
+    
+    console.log('====================================');
     const client = new shopify.api.clients.Graphql({
       session: res.locals.shopify.session,
     });
